@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "36837832453",
+    "project_id": "baseer-98f34",
+    "storage_bucket": "baseer-98f34.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36837832453:android:0efdbf033dc99b9862e96c",
+        "android_client_info": {
+          "package_name": "com.example.baseer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3EfwfARKS4AR3ouOEII6SZ-UMt-3JoZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
