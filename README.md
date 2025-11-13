@@ -10,8 +10,7 @@ Baseer is a comprehensive Flutter-based mobile healthcare application designed t
 
 ---
 
-## ✨ Key Features
-
+## ✨ Key Feature
    •	🔍 OCR Drug Detection - Scan prescriptions to automatically identify medications
    •	💊 Smart Reminders - Schedule and track medication intake with push notifications
    •	💬 Real-time Chat - Direct communication between patients and pharmacists
@@ -139,8 +138,11 @@ lib/
 └── main.dart                   # App entry point
 
 ```
+## 🪄 App Preview
 
+![App Demo](assets/screenshots/demo.gif)
 
+---
 ## 📅 Future Enhancements
    -  🌍 Multi-Language Support - Expand beyond Arabic/English for global accessibility
    -  📴 Offline Mode - Local caching for uninterrupted access to medication data
