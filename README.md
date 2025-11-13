@@ -12,32 +12,31 @@ Baseer is a comprehensive Flutter-based mobile healthcare application designed t
 
 ## ✨ Key Features
 
-
-•	🔍 OCR Drug Detection - Scan prescriptions to automatically identify medications
-•	💊 Smart Reminders - Schedule and track medication intake with push notifications
-•	💬 Real-time Chat - Direct communication between patients and pharmacists
-•	📊 Adherence Tracking - Visual statistics on medication compliance
-•	🎤 Voice Accessibility - Speech-to-text and text-to-speech for enhanced accessibility
-•	👤 Multi-Role System - Separate interfaces for Patients, Pharmacists, and Admins
-•	🔐 Biometric Authentication - Secure login with fingerprint/face recognition
+   •	🔍 OCR Drug Detection - Scan prescriptions to automatically identify medications
+   •	💊 Smart Reminders - Schedule and track medication intake with push notifications
+   •	💬 Real-time Chat - Direct communication between patients and pharmacists
+   •	📊 Adherence Tracking - Visual statistics on medication compliance
+   •	🎤 Voice Accessibility - Speech-to-text and text-to-speech for enhanced accessibility
+   •	👤 Multi-Role System - Separate interfaces for Patients, Pharmacists, and Admins
+   •	🔐 Biometric Authentication - Secure login with fingerprint/face recognition
 
 ---
 
 ## 🛠️ Tech Stack
-Frontend
-•	Flutter (3.0+) - Cross-platform mobile framework
-•	Dart - Programming language
-•	BLoC Pattern (flutter_bloc) - State management
-•	Material Design - UI/UX components
-Backend & Cloud Services
-•	Firebase Authentication - User authentication with email/password
-•	Cloud Firestore - NoSQL database for real-time data
-•	Firebase Cloud Messaging (FCM) - Push notifications
-•	Firebase Storage - Profile images and medical documents
-AI & Machine Learning
-•	Python FastAPI - OCR backend service (Port 8000)
-•	OCR Engine - Prescription text extraction
-•	Drug Database - Medication information retrieval
+- Frontend
+   •	Flutter (3.0+) - Cross-platform mobile framework
+   •	Dart - Programming language
+   •	BLoC Pattern (flutter_bloc) - State management
+   •	Material Design - UI/UX components
+- Backend & Cloud Services
+   •	Firebase Authentication - User authentication with email/password
+   •	Cloud Firestore - NoSQL database for real-time data
+   •	Firebase Cloud Messaging (FCM) - Push notifications
+   •	Firebase Storage - Profile images and medical documents
+- AI & Machine Learning
+   •	Python FastAPI - OCR backend service (Port 8000)
+   •	OCR Engine - Prescription text extraction
+   •	Drug Database - Medication information retrieval
 
 
 
