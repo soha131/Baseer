@@ -10,8 +10,8 @@ import 'package:image/image.dart' as img;
 class OcrDetectCubit extends Cubit<OcrDetectState> {
   OcrDetectCubit() : super(OcrDetectInitial());
 
-  final String baseUrl = "http://192.168.100.6:8000";
-  //final String baseUrl = "http://10.0.2.2:8000";
+ // final String baseUrl = "http://192.168.100.6:8000";
+  final String baseUrl = "http://10.0.2.2:8000";
 
   Future<void> detectDrugsFromImage(File imageFile) async {
     emit(OcrDetectLoading());

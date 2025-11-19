@@ -218,6 +218,7 @@ class _PharmacistInfoScreenState extends State<PharmacistInfoScreen> {
     final status = widget.userData["status"] ?? "N/A";
     final dob = widget.userData["dob"] ?? "N/A";
     final likesCount = widget.userData["likesCount"];
+    final careerPath = widget.userData["careerPath"];
 
     final dobFormatted = _formatDob(dob);
 
@@ -230,6 +231,7 @@ class _PharmacistInfoScreenState extends State<PharmacistInfoScreen> {
     Role: $role.
     Status: $status.
     Likes Count: $likesCount.
+    careerPath: $careerPath.
     """;
 
     await flutterTts.stop();
@@ -251,7 +253,7 @@ class _PharmacistInfoScreenState extends State<PharmacistInfoScreen> {
     final status = widget.userData["status"] ?? "N/A";
     final dobRaw = widget.userData["dob"];
     final likesCount = widget.userData["likesCount"];
-
+    final careerPath= widget.userData["careerPath"];
     final dobFormatted = _formatDob(dobRaw);
     final age = _calculateAge(dobRaw);
 
@@ -364,16 +366,13 @@ class _PharmacistInfoScreenState extends State<PharmacistInfoScreen> {
                           ],
                         ),
                       ],
-                    )
-
-                   /* const SizedBox(height: 14),
+                    ),
+                    const SizedBox(height: 14),
                     const Text("Career Path",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),
                     const SizedBox(height: 6),
-                    const Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                  */
+                     Text("$careerPath")
                   ],
                 ),
               ),

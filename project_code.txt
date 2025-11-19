@@ -116,13 +116,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ),
 
-            // ðŸ”¹ Ù…Ø­ØªÙˆÙ‰ Ø§Ù„ØµÙØ­Ø©
             Expanded(child: pages[_selectedIndex]),
           ],
         ),
       ),
 
-      // ðŸ”¹ Bottom Navigation
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: Color(0xff2260FF),

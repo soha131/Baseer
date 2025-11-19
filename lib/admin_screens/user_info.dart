@@ -169,17 +169,17 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                             Expanded(child: Text("Role: $role")),
                           ],
                         ),
+                        const SizedBox(height: 6),
+                        if (role == "Pharmacist" &&
+                            userData["careerPath"] != null &&
+                            userData["careerPath"].toString().isNotEmpty) ...[
+                          const SizedBox(height: 6),
+                          Text("Career Path: ${userData["careerPath"]}"),
+                        ],
+
                       ],
                     )
 
-                    /* const SizedBox(height: 14),
-                    const Text("Career Path",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                    const SizedBox(height: 6),
-                    const Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                  */
                   ],
                 ),
               ),
@@ -261,26 +261,5 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
     );
   }
 
-  Widget _bottomNav() {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xff2260FF),
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-      ),
-      child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "Profile"),
-        ],
-      ),
-    );
-  }
+
 }

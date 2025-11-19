@@ -15,6 +15,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _dobController = TextEditingController();
+  final _careerController = TextEditingController();
 
   DateTime? _selectedDob;
   bool _loading = false;
@@ -41,7 +42,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       // قراءة الـ role
       _role = data["role"] ?? "user";
 
-      // التعامل مع الـ DOB
+      if (_role == "Pharmacist") {
+        _careerController.text = data["careerPath"] ?? "";
+      }
+
       var dobData = data["dob"];
       if (dobData != null && dobData is Timestamp) {
         _selectedDob = dobData.toDate();
@@ -64,12 +68,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (user == null) return;
 
     try {
-      await FirebaseFirestore.instance.collection("users").doc(user.uid).update({
+      Map<String, dynamic> updateData = {
         "fullName": _nameController.text.trim(),
         "mobile": _phoneController.text.trim(),
         "dob": _selectedDob != null ? Timestamp.fromDate(_selectedDob!) : null,
-        // الايميل مش هيتغير هنا
-      });
+      };
+
+      // 👈 إضافة career path لو الفارمس
+      if (_role == "Pharmacist") {
+        updateData["careerPath"] = _careerController.text.trim();
+      }
+
+      await FirebaseFirestore.instance.collection("users").doc(user.uid).update(updateData);
+
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("تم تحديث البيانات بنجاح ✅")),
@@ -158,7 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     controller: _emailController,
                     label: "Email",
                     hint: "ahmed@gmail.com",
-                    readOnly: true), // 👈 الايميل مش بيتعدل
+                    readOnly: true),
                 const SizedBox(height: 16),
 
                 _buildTextField(
@@ -175,7 +186,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now(),
                     );
-
                     if (pickedDate != null) {
                       _selectedDob = pickedDate;
                       String formattedDate =
@@ -188,6 +198,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }
                   },
                 ),
+                if (_role == "Pharmacist") ...[
+                  const SizedBox(height: 16),
+                  _buildTextField(
+                    controller: _careerController,
+                    label: "Career Path",
+                    hint: "e.g. Clinical Pharmacist",
+                  ),
+                ],
 
                 const SizedBox(height: 40),
 

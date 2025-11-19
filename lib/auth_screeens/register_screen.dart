@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _mobileController = TextEditingController();
   final _dobController = TextEditingController();
+  final _careerController = TextEditingController();
 
   DateTime? _selectedDob;
   String _selectedRole = "User";
@@ -99,10 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
         String status = _selectedRole == "Pharmacist" ? "pending" : "approved";
 
-        await FirebaseFirestore.instance
-            .collection("users")
-            .doc(userCredential.user!.uid)
-            .set({
+        Map<String, dynamic> userData = {
           "fullName": _fullNameController.text.trim(),
           "email": _emailController.text.trim(),
           "mobile": _mobileController.text.trim(),
@@ -110,9 +108,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
           "role": _selectedRole,
           "status": status,
           "createdAt": FieldValue.serverTimestamp(),
-        });
+        };
 
-// 📢 إشعار للأدمن لو Pharmacist جديد
+        if (_selectedRole == "Pharmacist") {
+          userData["careerPath"] = _careerController.text.trim();
+        }
+
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(userCredential.user!.uid)
+            .set(userData);
+
         if (_selectedRole == "Pharmacist") {
           final admins = await FirebaseFirestore.instance
               .collection("users")
@@ -187,15 +193,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
-    // تعليمات قبل السؤال مع فاصل صوتي
     await _flutterTts.speak(" ${steps[_currentStep]} ...");
     await _flutterTts.awaitSpeakCompletion(true);
     await Future.delayed(const Duration(seconds: 1));
 
-    // تهيئة المايك
     bool available = await _speech.initialize(
       onError: (error) async {
-        print("خطأ في المايك: $error");
         await _flutterTts.speak("لم أتمكن من التعرف على الصوت.");
         await _flutterTts.awaitSpeakCompletion(true);
         if (mounted) setState(() => _isListening = false);
@@ -207,9 +210,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (mounted) setState(() => _isListening = true);
 
-    // بدء الاستماع
     _speech.listen(
-      localeId: 'en-US', // المستخدم يتكلم إنجليزي
+      localeId: 'en-US',
       onResult: (result) async {
         if (!result.finalResult) return;
 
@@ -220,11 +222,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (recognizedText.isEmpty) {
           await _flutterTts.speak("معذرةً، لم أسمع بوضوح.");
           await _flutterTts.awaitSpeakCompletion(true);
-          // لا نعيد السؤال تلقائيًا، المستخدم سيبدأ تاني بنفسه
           return;
         }
 
-        // تخزين النص حسب الخطوة
         switch (_currentStep) {
           case 0: _fullNameController.text = recognizedText; break;
           case 1: _emailController.text = recognizedText.replaceAll(' ', ''); break;
@@ -354,6 +354,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onChanged: (v) => setState(() => _selectedRole = v!),
                 decoration: _inputDecoration("Select Role"),
               ),
+              if (_selectedRole == "Pharmacist") ...[
+                const SizedBox(height: 16),
+                _buildLabel("Career Path"),
+                TextFormField(
+                  controller: _careerController,
+                  validator: (v) {
+                    if (_selectedRole == "Pharmacist" && (v == null || v.isEmpty)) {
+                      return "Career path is required";
+                    }
+                    return null;
+                  },
+                  decoration: _inputDecoration("e.g. Clinical Pharmacist"),
+                ),
+              ],
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _signUp,
@@ -465,9 +479,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
   @override
   void dispose() {
-    // وقف المايك
     _speech.stop();
-    // وقف الـ TTS
     _flutterTts.stop();
     _isListening = false;
     _currentStep = 0;
