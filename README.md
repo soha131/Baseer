@@ -56,7 +56,7 @@ Baseer is a comprehensive Flutter-based mobile healthcare application designed t
 ---
 ## 🪄 App Preview
 
-![App Demo](assets/screenshots/demo.gif)
+![App Demo](assets/screenshots/demo_baseer.gif)
 
 ---
 
