@@ -38,7 +38,6 @@ class OcrDetectCubit extends Cubit<OcrDetectState> {
       final streamedResponse = await request.send().timeout(Duration(seconds: 90));
       final response = await http.Response.fromStream(streamedResponse);
 
-      print("Response body: ${response.body}");
 
       if (response.statusCode == 200) {
         try {
